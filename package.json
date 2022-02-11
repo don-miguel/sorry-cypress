@@ -1,6 +1,6 @@
 {
   "name": "sorry-cypress",
-  "version": "2.0.1",
+  "version": "2.1.1",
   "author": {
     "name": "Andrew Goldis",
     "email": "agoldis@gmail.com"
@@ -16,7 +16,8 @@
   ],
   "resolutions": {
     "@types/express": "4.17.12",
-    "@types/serve-static": "1.13.10"
+    "@types/serve-static": "1.13.10",
+    "pac-resolver": "^5.0.0"
   },
   "scripts": {
     "killall": "ps -ef | egrep \"webpack|node|nodemon\" | grep sorry | awk '{ print $2 }' | xargs kill",
@@ -33,7 +34,7 @@
     }
   },
   "devDependencies": {
-    "eslint": "^7.10.0",
+    "eslint": "^8.7.0",
     "eslint-config-prettier": "^6.12.0",
     "eslint-plugin-jest": "^24.0.2",
     "eslint-plugin-react": "^7.21.2",

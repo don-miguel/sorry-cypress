@@ -143,12 +143,12 @@ export async function reportToSlack(
           ],
         },
       ],
-      icon_url: 'https://sorry-cypress.s3.amazonaws.com/images/icon-bg.png',
+      icon_url: 'https://sorry-cypress.s3.amazonaws.com/images/logo-bg.png',
     },
   }).catch((error) => {
     getLogger().error(
       { error, ...hook },
-      `Error while posting hook to ${hook.url}`
+      `Error while posting Slack message to ${hook.url}`
     );
   });
 }

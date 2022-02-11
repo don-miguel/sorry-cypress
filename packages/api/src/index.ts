@@ -1,9 +1,10 @@
 // organize-imports-ignore
-import 'source-map-support/register'
+import 'source-map-support/register';
+
 
 import { initMongoNoIndexes } from '@sorry-cypress/mongo';
 import { ApolloServer } from 'apollo-server';
-import { PORT } from './config';
+import { HOST, PORT } from './config';
 import { InstancesAPI } from './datasources/instances';
 import { ProjectsAPI } from './datasources/projects';
 import { RunsAPI } from './datasources/runs';
@@ -32,7 +33,7 @@ async function start() {
   });
 
   server
-    .listen({ port: PORT })
+    .listen({ host: HOST, port: PORT })
     .then(({ url }) => {
       console.log(`🚀 Apollo server is ready at ${url}`);
     })
