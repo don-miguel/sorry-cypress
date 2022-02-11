@@ -7,6 +7,7 @@ import {
 import { isInstanceFailed } from '@sorry-cypress/director/lib/results';
 import { ScreenshotsDriver } from '@sorry-cypress/director/types';
 import md5 from 'md5';
+import path from 'path';
 import {
   getImageUploadUrl,
   getVideoUploadUrl as s3getVideoUploadUrl,
@@ -17,7 +18,10 @@ const getScreenshotUploadInstruction = (namespace: string) => async (
 ): Promise<ScreenshotUploadInstruction> => {
   const key = md5(`${namespace}:${screenshot.screenshotId}`);
   return {
-    ...(await getImageUploadUrl(key)),
+    ...(await getImageUploadUrl(
+      key,
+      screenshot.path ? path.extname(screenshot.path) : '.png'
+    )),
     screenshotId: screenshot.screenshotId,
   };
 };

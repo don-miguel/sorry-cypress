@@ -8,7 +8,6 @@ import {
   AppError,
   CLAIM_FAILED,
   RUN_EXISTS,
-  SPEC_COMPLETE_FAILED,
 } from '@sorry-cypress/director/lib/errors';
 import { getSanitizedMongoObject } from '@sorry-cypress/director/lib/results';
 import { ExecutionDriver } from '@sorry-cypress/director/types';
@@ -174,7 +173,7 @@ export const setSpecCompleted = async (
       specs: {
         $elemMatch: {
           instanceId,
-          completedAt: null,
+          // completedAt: null,
         },
       },
     },
@@ -212,7 +211,7 @@ export const setSpecCompleted = async (
   if (matchedCount && modifiedCount) {
     return;
   } else {
-    throw new AppError(SPEC_COMPLETE_FAILED);
+    // throw new AppError(SPEC_COMPLETE_FAILED);
   }
 };
 

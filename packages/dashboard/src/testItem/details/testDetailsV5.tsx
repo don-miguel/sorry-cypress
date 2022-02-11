@@ -160,6 +160,11 @@ export const TestDetailsV5: TestDetailsV5Component = (props) => {
               {test.state === 'skipped' && <SkippedTest />}
               {test.displayError && <TestError error={test.displayError} />}
             </Grid>
+            {screenshots.map((screenshot) => (
+              <Grid item xs={12} key={screenshot.screenshotId}>
+                <Screenshot screenshot={screenshot} />
+              </Grid>
+            ))}
           </Grid>
         </AccordionDetails>
       </Accordion>

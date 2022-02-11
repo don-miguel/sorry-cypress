@@ -57,10 +57,13 @@ export const getUploadUrl = async ({
 };
 
 export const getImageUploadUrl = async (
-  key: string
+  key: string,
+  ext: string
 ): Promise<AssetUploadInstruction> =>
   getUploadUrl({
-    key: `${sanitizeS3KeyPrefix(S3_IMAGE_KEY_PREFIX)}${key}.png`,
+    key: `${sanitizeS3KeyPrefix(S3_IMAGE_KEY_PREFIX)}${key}${ext}`,
+    ContentType: ext === '.png' ? 'image/png' : 'image/gif',
+    Expires: 90,
   });
 
 export const getVideoUploadUrl = async (

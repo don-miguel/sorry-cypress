@@ -19,6 +19,7 @@ export interface Screenshot {
   height: number;
   width: number;
   screenshotURL?: string;
+  path?: string;
 }
 
 export interface InstanceResultStats {

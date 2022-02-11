@@ -2,10 +2,7 @@ import { InstanceResult, SetInstanceTestsPayload } from '@sorry-cypress/common';
 import {
   AppError,
   INSTANCE_EXISTS,
-  INSTANCE_RESULTS_UPDATE_FAILED,
   INSTANCE_SET_TESTS_FAILED,
-  SCREENSHOT_URL_UPDATE_FAILED,
-  VIDEO_URL_UPDATE_FAILED,
 } from '@sorry-cypress/director/lib/errors';
 import { getSanitizedMongoObject } from '@sorry-cypress/director/lib/results';
 import { Collection } from '@sorry-cypress/mongo';
@@ -63,7 +60,7 @@ export const setInstanceResults = async (
   if (matchedCount && modifiedCount) {
     return;
   } else {
-    throw new AppError(INSTANCE_RESULTS_UPDATE_FAILED);
+    // throw new AppError(INSTANCE_RESULTS_UPDATE_FAILED);
   }
 };
 
@@ -111,7 +108,25 @@ export const setScreenshotUrl = async (
   if (matchedCount && modifiedCount) {
     return;
   } else {
-    throw new AppError(SCREENSHOT_URL_UPDATE_FAILED);
+    const instance = await Collection.instance().findOne({ instanceId });
+    if (!instance) return;
+    await Collection.instance().updateOne(
+      {
+        instanceId,
+      },
+      {
+        $push: {
+          'results.screenshots': {
+            screenshotId,
+            screenshotURL,
+            testId: screenshotId.replace(/-\d/, ''),
+            height: 660,
+            width: 1200,
+          },
+        },
+      }
+    );
+    // throw new AppError(SCREENSHOT_URL_UPDATE_FAILED);
   }
 };
 
@@ -130,6 +145,6 @@ export const setvideoUrl = async (instanceId: string, videoUrl: string) => {
   if (matchedCount && modifiedCount) {
     return;
   } else {
-    throw new AppError(VIDEO_URL_UPDATE_FAILED);
+    // throw new AppError(VIDEO_URL_UPDATE_FAILED);
   }
 };
